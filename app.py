@@ -20,8 +20,10 @@ class Item(db.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        item_content = request.form['content']
-        new_item = Item(content=item_content)
+        item_name = request.form['item_name']
+        store_name = request.form['store_name']
+        quantity = request.form['quantity']
+        new_item = Item(item_name=item_name, store_name=store_name, quantity=quantity)
 
         try:
             db.session.add(new_item)
@@ -50,7 +52,9 @@ def update(id):
     item = Item.query.get_or_404(id)
 
     if request.method == 'POST':
-        item.content = request.form['content']
+        item.item_name = request.form['item_name']
+        item.store_name = request.form['store_name']
+        item.quantity = request.form['quantity']
 
         try:
             db.session.commit()
