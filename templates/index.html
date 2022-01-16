@@ -22,7 +22,7 @@
         <tr>
             <td>{{ item.item_name }}</td>
             <td>{{ item.store_name }}</td>
-            <td>{{ item.quantity }}</td>
+            <td><a href="/decrement/{{item.id}}">-</a> {{ item.quantity }} <a href="/increment/{{item.id}}">+</a></td>
             <td>{{ item.date_created.date() }}</td>
             <td>
                 <a href="/delete/{{item.id}}">Delete</a>
@@ -41,7 +41,7 @@
             <label for:"store_name">At store:</label>
             <input type="text" name="store_name" id="store_name"><br><br>
             <label for:"quantity">Quanity:</label>
-            <input type="number" name="quantity" id="quantity"><br><br>
+            <input type="number" name="quantity" id="quantity" min="1"><br><br>
             <input type="submit" value="Add Item">
         </form>
     </div>

@@ -65,5 +65,31 @@ def update(id):
     else:
         return render_template('update.html', item=item)
 
+@app.route('/increment/<int:id>')
+def increment(id):
+    item = Item.query.get_or_404(id)
+
+    try:
+        item.quantity = item.quantity + 1
+        db.session.commit()
+        return redirect('/')
+    except:
+        'There was an issue modifying your item quantity'
+
+
+@app.route('/decrement/<int:id>')
+def decrement(id):
+    item = Item.query.get_or_404(id)
+
+    if item.quantity - 1 == 0:
+        delete(id)
+    else:
+        try:
+            item.quantity = item.quantity - 1
+            db.session.commit()
+            return redirect('/')
+        except:
+            'There was an issue modifying your item quantity'
+
 if __name__ == "__main__":
     app.run(debug=True)
