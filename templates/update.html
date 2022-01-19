@@ -9,7 +9,7 @@
     <h1 style="text-align: center">Update Item</h1>
 
     <div class="form">
-        <form action="/update/{{item.id}}" method="POST">
+        <form action="/{{list.id}}/update/{{item.id}}" method="POST">
             <label for:"item_name">Name:</label>
             <input type="text" name="item_name" id="item_name" value="{{item.item_name}}"><br><br>
             <label for:"store_name">Name:</label>
