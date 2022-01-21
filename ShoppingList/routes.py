@@ -1,31 +1,6 @@
-from flask import Flask, render_template, url_for, request, redirect
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-db = SQLAlchemy(app)
-
-
-class List(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    list_name = db.Column(db.String(100), nullable=False)
-    items = db.relationship("Item", backref='list')
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return '<List %r>' % self.id
-
-class Item(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    item_name = db.Column(db.String(100), nullable=False)
-    store_name = db.Column(db.String(100), nullable=True)
-    quantity = db.Column(db.Integer)
-    list_id = db.Column(db.Integer, db.ForeignKey('list.id'), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return '<Item %r>' % self.id
+from flask import render_template, url_for, request, redirect
+from ShoppingList import app
+from ShoppingList.models import List, Item, db
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -152,6 +127,3 @@ def decrement(list_id, id):
             return redirect(url_for('list', list_id=list_id))
         except:
             'There was an issue modifying your item quantity'
-
-if __name__ == "__main__":
-    app.run(debug=True)
