@@ -29,12 +29,14 @@
 
     <div class="form">
         <form action="/" method="POST">
-            <label for:"item_name">Name:</label>
-            <input type="text" name="list_name" id="list_name"><br><br>
-            <input type="submit" value="Add List">
+            {{ form.csrf_token }}
+            <fieldset>
+                {{ form.name.label }}
+                {{ form.name }}
+            </fieldset>
+            
+            {{ form.submit }}
         </form>
     </div>
-
-
 </div>
 {% endblock %}
