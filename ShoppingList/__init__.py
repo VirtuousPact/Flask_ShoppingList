@@ -1,8 +1,18 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.config.from_object('config.Config')
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
-from ShoppingList import routes
+def init_app():
+    app = Flask(__name__, instance_relative_config=False)
+    app.config.from_object('config.Config')
+
+    db.init_app(app)
+
+    with app.app_context():
+
+        from . import routes
+
+        #TODO: add blueprints
+
+        return app

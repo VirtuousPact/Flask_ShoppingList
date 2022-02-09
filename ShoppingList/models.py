@@ -1,4 +1,4 @@
-from ShoppingList import db
+from . import db
 from datetime import datetime
 
 class List(db.Model):

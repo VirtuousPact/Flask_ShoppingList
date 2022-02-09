@@ -1,6 +1,7 @@
+import imp
 from flask import render_template, url_for, request, redirect, flash
-from ShoppingList import app
-from ShoppingList.models import List, Item, db
+from flask import current_app as app
+from .models import List, Item, db
 from .forms import ListForm, ItemForm
 
 
