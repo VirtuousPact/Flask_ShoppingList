@@ -11,8 +11,11 @@ def init_app():
 
     with app.app_context():
 
-        from . import routes
+        from .home import home_routes
+        from .list import list_routes
 
         #TODO: add blueprints
+        app.register_blueprint(home_routes.home_bp)
+        app.register_blueprint(list_routes.list_bp)
 
         return app
